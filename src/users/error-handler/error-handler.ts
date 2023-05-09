@@ -1,4 +1,7 @@
-import { BadRequestException } from '@nestjs/common';
+import {
+  BadRequestException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 
 /* eslint-disable @typescript-eslint/no-empty-function */
 export class ErrorHandler {
@@ -20,6 +23,7 @@ export class ErrorHandler {
         'Error: el registro ya existe en la base de datos',
       );
     }
+    throw new InternalServerErrorException(`Error: ${error.message}`);
   }
 }
 
