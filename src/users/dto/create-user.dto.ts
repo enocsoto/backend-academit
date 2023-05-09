@@ -20,7 +20,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   @MaxLength(50)
-  lastname: string;
+  lastName: string;
 
   @ApiProperty({
     example: 'johndoe',
@@ -30,7 +30,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   @MaxLength(50)
-  username: string;
+  userName: string;
 
   @ApiProperty({
     example: 'password123',

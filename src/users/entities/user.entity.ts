@@ -17,10 +17,10 @@ export class User {
   @Column({ length: 100 })
   name: string;
 
-  @Column({ length: 100 })
+  @Column({ name: 'lastname', length: 100 })
   lastName: string;
 
-  @Column({ length: 100 })
+  @Column({ name: 'username', length: 100 })
   userName: string;
 
   @Column({ length: 100 })
@@ -32,10 +32,10 @@ export class User {
   @Column({ length: 200, unique: true })
   email: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
   @OneToMany(() => Video, (video) => video.user)

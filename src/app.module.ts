@@ -21,6 +21,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: 'ERROR_DUP_ENTRY',
+      useFactory: () => {
+        return 'ER_DUP_ENTRY';
+      },
+    },
+  ],
 })
 export class AppModule {}
