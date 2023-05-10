@@ -16,14 +16,14 @@ export class ErrorHandler {
     return ErrorHandler.instance;
   }
 
-  handleDuplicateEntryError(error: any): void {
+  verifyError(error: any): void {
     if (error.code === 'ER_DUP_ENTRY') {
       console.error('Error: el registro ya existe en la base de datos');
       throw new BadRequestException(
         'Error: el registro ya existe en la base de datos',
       );
     }
-    throw new InternalServerErrorException(`Error: ${error.message}`);
+    throw error;
   }
 }
 

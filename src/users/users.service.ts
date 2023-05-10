@@ -18,9 +18,7 @@ export class UsersService {
       const user: User = this.userRepository.create(createUserDto);
       return await this.userRepository.save(user);
     } catch (error) {
-      if (error.code === 'ER_DUP_ENTRY') {
-        this.errorHandler.handleDuplicateEntryError(error);
-      }
+      this.errorHandler.verifyError(error);
     }
   }
 
