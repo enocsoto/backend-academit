@@ -10,8 +10,8 @@ services:
       MYSQL_DATABASE: 'academit-db'
       MYSQL_USER: 'fran'
     expose:
-      - 3306
+      - 3310
     ports:
-      - "3306:3306"
+      - "3310:3306"
     volumes:
       - ./data:/var/lib/mysql

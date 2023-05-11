@@ -1,43 +1,44 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  OneToMany,
-} from 'typeorm';
+import { Column, Entity, Index, OneToMany } from "typeorm";
+import { Video } from "./video.entity";
 
-import { Video } from './video.entity';
+@Index("username", ["username"], { unique: true })
+@Index("email", ["email"], { unique: true })
+@Entity("usuario", { schema: "academit-db" })
 
-@Entity()
 export class User {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+    @Column("varchar", { primary: true, name: "id", length: 255 })
+    id: string;
 
-  @Column({ length: 100 })
-  name: string;
+    @Column("varchar", { name: "name", length: 50 })
+    name: string;
 
-  @Column({ name: 'lastname', length: 100 })
-  lastName: string;
+    @Column("varchar", { name: "lastname", length: 255 })
+    lastname: string;
 
-  @Column({ name: 'username', length: 100 })
-  userName: string;
+    @Column("varchar", { name: "username", unique: true, length: 50 })
+    username: string;
 
-  @Column({ length: 100 })
-  password: string;
+    @Column("varchar", { name: "password", length: 255 })
+    password: string;
 
-  @Column()
-  birthdate: Date;
+    @Column("varchar", { name: "email", unique: true, length: 255 })
+    email: string;
 
-  @Column({ length: 200, unique: true })
-  email: string;
+    @Column("timestamp", {
+        name: "createdat",
+        default: () => "CURRENT_TIMESTAMP",
+    })
+    createdat: Date;
 
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+    @Column("timestamp", {
+        name: "updatedat",
+        default: () => "CURRENT_TIMESTAMP",
+    })
+    updatedat: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
-
-  @OneToMany(() => Video, (video) => video.user)
-  videos: Video[];
+    @OneToMany(() => Video, (video) => video.user)
+    videos: Video[];
 }
+
+
+

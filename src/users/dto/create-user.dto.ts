@@ -49,11 +49,4 @@ export class CreateUserDto {
   @IsEmail()
   @MaxLength(255)
   email: string;
-
-  @ApiProperty({
-    example: '1990-01-01',
-    description: 'The birthdate of the user in ISO date format',
-  })
-  @IsNotEmpty()
-  birthdate: Date;
 }
