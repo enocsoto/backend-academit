@@ -1,4 +1,4 @@
-import { Column, Entity, Index, OneToMany } from "typeorm";
+import { Column, Entity, Index, OneToMany, PrimaryColumn } from "typeorm";
 import { Video } from "./video.entity";
 
 @Index("username", ["username"], { unique: true })
@@ -6,7 +6,8 @@ import { Video } from "./video.entity";
 @Entity("usuario", { schema: "academit-db" })
 
 export class User {
-    @Column("varchar", { primary: true, name: "id", length: 255 })
+    
+    @PrimaryColumn("uuid", { primary: true, name: "id", length: 255})
     id: string;
 
     @Column("varchar", { name: "name", length: 50 })
