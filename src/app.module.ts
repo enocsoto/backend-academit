@@ -6,12 +6,17 @@ import { UsersModule } from './users/users.module';
 import { VideosModule } from './videos/videos.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from 'db/data-source';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     AuthModule,
     UsersModule,
     VideosModule,
-    TypeOrmModule.forRoot( dataSourceOptions ),
+    TypeOrmModule.forRoot(dataSourceOptions),
+    ConfigModule.forRoot({
+      envFilePath: `.${process.env.NODE_ENV}.env`,
+      isGlobal: true
+    }),
   ],
   controllers: [AppController],
   providers: [
@@ -24,4 +29,9 @@ import { dataSourceOptions } from 'db/data-source';
     },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  static port: number;
+  constructor(private readonly configService: ConfigService) {
+    AppModule.port = +this.configService.get('PORT');
+  }
+}

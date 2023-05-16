@@ -8,6 +8,7 @@ import { faker } from '@faker-js/faker';
 export class UserSeeder implements Seeder {
   async run(dataSource: DataSource, factoryManager: SeederFactoryManager): Promise<any> {
     const userRepository = dataSource.getRepository(User)
+    userRepository.delete({})
 
     const userData = await this.createFake()
     const dataCreated = await Promise.all(userData.map(item => userRepository.create(item)))
