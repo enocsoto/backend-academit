@@ -5,18 +5,18 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { VideosModule } from './videos/videos.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { dataSourceOptions } from 'db/data-source';
+import { dataSourceOptions } from 'src/config/data-source';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 @Module({
   imports: [
-    AuthModule,
-    UsersModule,
-    VideosModule,
-    TypeOrmModule.forRoot(dataSourceOptions),
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`,
       isGlobal: true
     }),
+    TypeOrmModule.forRoot({...dataSourceOptions}),
+    AuthModule,
+    UsersModule,
+    VideosModule,
   ],
   controllers: [AppController],
   providers: [

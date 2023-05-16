@@ -2,8 +2,9 @@ import { User } from 'src/users/entities';
 import { DataSource } from 'typeorm';
 import { Seeder, SeederFactoryManager } from 'typeorm-extension';
 import * as bcrypt from 'bcrypt';
-import { randomUUID } from 'crypto';
 import { faker } from '@faker-js/faker';
+import { } from 'uuid'
+import { randFutureDate } from '@ngneat/falso';
 
 export class UserSeeder implements Seeder {
   async run(dataSource: DataSource, factoryManager: SeederFactoryManager): Promise<any> {
@@ -21,15 +22,13 @@ export class UserSeeder implements Seeder {
     const data: Array<User> = []
     for (let i = 0; i < 20; i++) {
       data.push({
-        id: randomUUID(),
+        id: faker.string.uuid(),
         name: faker.person.firstName('male'),
         lastname: faker.person.lastName('male'),
         username: faker.internet.userName(),
         password: await bcrypt.hash('example', 8),
         email: faker.internet.email(),
         createdat: faker.date.anytime(),
-        updatedat: faker.date.anytime(),
-        videos: null
       })
     }
 
