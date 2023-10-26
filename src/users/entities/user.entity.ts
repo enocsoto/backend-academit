@@ -1,12 +1,14 @@
-import { Column, Entity, Index, OneToMany } from "typeorm";
+import { BaseEntity, Column, Entity, Index, OneToMany, PrimaryColumn } from "typeorm";
 import { Video } from "./video.entity";
+import { IUsers } from "../interfaces/users.interface";
 
 @Index("username", ["username"], { unique: true })
 @Index("email", ["email"], { unique: true })
 @Entity("usuario", { schema: "academit-db" })
 
-export class User {
-    @Column("varchar", { primary: true, name: "id", length: 255 })
+export class User extends BaseEntity implements IUsers{
+    
+    @PrimaryColumn("uuid", { primary: true, name: "id", length: 255})
     id: string;
 
     @Column("varchar", { name: "name", length: 50 })
@@ -36,8 +38,8 @@ export class User {
     })
     updatedat: Date;
 
-    @OneToMany(() => Video, (video) => video.user)
-    videos: Video[];
+    // @OneToMany(() => Video, (video) => video.user)
+    // videos: Video[];
 }
 
 

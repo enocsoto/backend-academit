@@ -25,8 +25,8 @@ export class Video {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => User, (user) => user.videos)
-  user: User;
+  // @ManyToOne(() => User, (user) => user.videos)
+  // user: User;
 
   @ManyToOne(() => Categoria, (categoria) => categoria.videos)
   categoria: Categoria;
